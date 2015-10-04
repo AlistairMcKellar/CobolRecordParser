@@ -51,9 +51,9 @@ namespace CobolRecordParser
 
                 Console.WriteLine("name:  {0}", match.Groups["name"].Value);
                 Console.WriteLine(" Type: {0}", match.Groups["type"].Value);
-                double size = getPicSize(match.Groups["size"].Value);
+                Record newRecord = new Record(match.Groups["name"].Value, match.Groups["size"].Value);
                 Console.WriteLine(" size: {0}", match.Groups["size"].Value);    // need a helper method to strip out the size
-                Console.WriteLine("   post processing size: {0}", size);
+                Console.WriteLine("   post processing size: {0}", newRecord.size());
 
                 //foreach (Group group in match.Groups)
                 //{
@@ -67,15 +67,6 @@ namespace CobolRecordParser
             Console.WriteLine("end of file");
         }
 
-        private static double getPicSize(string value)
-        {
-            value = value.replaceVs();
-            // we're going to need to parse this string somehow.
-            value = value.stripTypeDefs();
 
-            Console.WriteLine(value);
-
-            return double.Parse(value);
-        }
     }
 }
